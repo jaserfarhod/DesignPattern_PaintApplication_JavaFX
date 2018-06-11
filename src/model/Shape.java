@@ -80,7 +80,7 @@ public abstract class Shape implements Cloneable, Serializable {
         }
     }
 
-    //Template method
+    // Template method
     public final void draw(GraphicsContext gc) {
         Color color = Color.web(this.color);
         gc.setStroke(color);

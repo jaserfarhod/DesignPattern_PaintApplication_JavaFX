@@ -67,6 +67,7 @@ public class FileUtil {
      *
      * @return loadShapes a List of Shape objects.
      */
+    @SuppressWarnings("unchecked")
     public List<Shape> loadProject() {
         FileChooser fileChooser = getFileChooser("Open Project", "mydat", "*.mydat");
         File file = fileChooser.showOpenDialog(null);
