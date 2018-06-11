@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DrawingViewController">
+
+    <children>
+        <BorderPane prefHeight="800.0" prefWidth="1200.0">
+            <left>
+                <VBox prefHeight="769.0" prefWidth="125.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox prefHeight="25.0" prefWidth="100.0">
+                            <children>
+                                <Button fx:id="undo" mnemonicParsing="false" onAction="#onActinoUndo" text="undo">
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </HBox.margin>
+                                </Button>
+                                <Button fx:id="redo" mnemonicParsing="false" onAction="#onActionRedo" text="redo">
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                        </HBox>
+                        <ColorPicker fx:id="colorPicker" onAction="#onActionColorPicker">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </VBox.margin>
+                        </ColorPicker>
+                        <CheckBox fx:id="filledShape" mnemonicParsing="false" onAction="#onActionFilledShape" text="filled shape">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </VBox.margin>
+                        </CheckBox>
+                        <ComboBox fx:id="shapePicker" prefWidth="150.0">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </VBox.margin>
+                        </ComboBox>
+                        <Label fx:id="thickness" nodeOrientation="LEFT_TO_RIGHT" text="thickness:" underline="true">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </VBox.margin>
+                        </Label>
+                        <ComboBox fx:id="thicknessPicker" onAction="#onActionThicknessPicker" prefWidth="150.0">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </VBox.margin>
+                        </ComboBox>
+                        <CheckBox fx:id="editSelectedItem" mnemonicParsing="false" onAction="#onActionEditSelectedItem" text="Edit">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </VBox.margin>
+                        </CheckBox>
+                        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onActionDelete" text="Delete">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </VBox.margin>
+                        </Button>
+                  <Button fx:id="composite" mnemonicParsing="false" onAction="#onActionComposite" text="Composite">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                    </children>
+                </VBox>
+            </left>
+            <top>
+                <MenuBar BorderPane.alignment="CENTER">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem fx:id="openProject" mnemonicParsing="false" onAction="#onActionOpenProject" text="Open Project" />
+                                <MenuItem fx:id="saveProject" mnemonicParsing="false" onAction="#onActionSaveProject" text="Save Project" />
+                                <MenuItem fx:id="saveImage" mnemonicParsing="false" onAction="#onActionSaveImage" text="Save Image" />
+                                <MenuItem fx:id="closeProgram" mnemonicParsing="false" onAction="#onActionCloseProgram" text="Close" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+            </top>
+            <center>
+                <Canvas fx:id="canvas" height="769.0" onMouseDragged="#onMouseDraggedCanvas" onMousePressed="#onMousePressedCanvas" onMouseReleased="#onMouseReleasedCanvas" width="1075.0" BorderPane.alignment="TOP_LEFT" />
+            </center>
+            <right>
+                <VBox prefHeight="769.0" prefWidth="188.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <ListView fx:id="listView" prefHeight="779.0" prefWidth="188.0" />
+                    </children>
+                </VBox>
+            </right>
+        </BorderPane>
+    </children>
+</AnchorPane>
