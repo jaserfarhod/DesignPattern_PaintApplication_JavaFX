@@ -1,6 +1,6 @@
 # Paint Application
 
-A simple paint application created for the purpose of learning about and implementing various design patterns.
+A simple paint application created for the purpose of learning about and implementing various design patterns. This project was part of a Design Pattern course @ KTH.
 
 ## Built With
 
