@@ -21,6 +21,7 @@ public class PaintApplication extends Application {
         primaryStage.setTitle("Paint Application");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(true);
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
