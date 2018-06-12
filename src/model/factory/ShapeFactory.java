@@ -13,7 +13,7 @@ public class ShapeFactory extends AbstractShapeFactory {
      */
     @Override
     public Line createLine() {
-        return (Line) ShapePrototype.getShapePrototype("line");
+        return (Line) ShapePrototype.getShapePrototype(Shapes.LINE);
     }
 
     /**
@@ -21,7 +21,7 @@ public class ShapeFactory extends AbstractShapeFactory {
      */
     @Override
     public Oval createOval() {
-        return (Oval) ShapePrototype.getShapePrototype("oval");
+        return (Oval) ShapePrototype.getShapePrototype(Shapes.OVAL);
     }
 
 
@@ -30,7 +30,7 @@ public class ShapeFactory extends AbstractShapeFactory {
      */
     @Override
     public Rectangle createRectangle() {
-        return (Rectangle) ShapePrototype.getShapePrototype("rectangle");
+        return (Rectangle) ShapePrototype.getShapePrototype(Shapes.RECTANGLE);
     }
 
     /**
@@ -38,6 +38,6 @@ public class ShapeFactory extends AbstractShapeFactory {
      */
     @Override
     public Star createStar() {
-        return (Star) ShapePrototype.getShapePrototype("star");
+        return (Star) ShapePrototype.getShapePrototype(Shapes.STAR);
     }
 }

@@ -14,24 +14,25 @@ import java.util.Hashtable;
  * Part of sample from https://dzone.com/articles/design-patterns-prototype
  */
 public class ShapePrototype {
-    private static Hashtable<String, Shape> shapePrototypes = new Hashtable<>();
+
+    private static Hashtable<Shapes, Shape> shapePrototypes = new Hashtable<>();
 
     static {
-        shapePrototypes.put("rectangle", new Rectangle());
-        shapePrototypes.put("oval", new Oval());
-        shapePrototypes.put("line", new Line());
-        shapePrototypes.put("star", new Star());
+        shapePrototypes.put(Shapes.RECTANGLE, new Rectangle());
+        shapePrototypes.put(Shapes.OVAL, new Oval());
+        shapePrototypes.put(Shapes.LINE, new Line());
+        shapePrototypes.put(Shapes.STAR, new Star());
     }
 
     /**
      * To create a new shape
      *
-     * @param type the shape to create
+     * @param shapeType the shape to create
      * @return a clone of the shape type
      */
-    public static Shape getShapePrototype(String type) {
+    public static Shape getShapePrototype(Shapes shapeType) {
         try {
-            return shapePrototypes.get(type.toLowerCase()).clone();
+            return shapePrototypes.get(shapeType).clone();
         } catch (NullPointerException ex) {
             return null;
         }
