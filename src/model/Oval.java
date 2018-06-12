@@ -33,7 +33,7 @@ public class Oval extends Shape implements Cloneable, Serializable {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Oval";
     }
 }

@@ -9,15 +9,15 @@ import javafx.stage.Stage;
 /**
  * A simple Paint Application where you can draw and play with
  * shapes!
- *
+ * <p>
  * By: Robert & Jaser
  */
 public class PaintApplication extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         // Turn on/off logging
-        //PaintLogging.stopLogging();
+        // PaintLogging.stopLogging();
 
         Parent root = FXMLLoader.load(getClass().getResource("../view/DrawingView.fxml"));
 

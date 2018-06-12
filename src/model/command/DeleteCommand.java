@@ -39,6 +39,6 @@ public class DeleteCommand implements CommandInterface {
      */
     @Override
     public void undo() {
-        shapes.add(this.index,shape);
+        shapes.add(this.index, shape);
     }
 }

@@ -17,7 +17,8 @@ public class ChangeColorCommand implements CommandInterface {
 
     /**
      * Add a shape and the new color it should have
-     * @param shape the shape to change color
+     *
+     * @param shape    the shape to change color
      * @param newColor the new color
      */
     public ChangeColorCommand(Shape shape, Color newColor) {

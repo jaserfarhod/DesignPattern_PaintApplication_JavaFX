@@ -265,11 +265,11 @@ public class DrawingViewController implements Initializable, Observer {
                 "observable: " + observable.toString() + "\n" +
                 "arg: " + arg.toString());
 
-        //observer observable from:
+        // observer observable from:
         // https://www.javaworld.com/article/2077258/learn-java/observer-and-observable.html
         if (observable == modelFacade) {
 
-            //https://stackoverflow.com/questions/14346219/unsafe-parameterized-arraylist-cast-after-notify-from-observable
+            // https://stackoverflow.com/questions/14346219/unsafe-parameterized-arraylist-cast-after-notify-from-observable
             viewList.clear();
             if (arg instanceof ArrayList<?>) {
                 for (Object o : (ArrayList<?>) arg) {

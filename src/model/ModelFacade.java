@@ -142,7 +142,6 @@ public class ModelFacade extends Observable {
                     clicked.getY() < Math.max(shape.getP1().getY(), shape.getP2().getY())) {
 
                 setMarkedShape(shape);
-//                reRender(gc);
                 subjectNotify();
             }
         }
@@ -172,21 +171,20 @@ public class ModelFacade extends Observable {
             commandInvoker.setCommand(new DeleteCommand(shapes, shape));
             commandInvoker.redo();
         }
-        markedShapes.clear();
 
-//        reRender(gc);
+        markedShapes.clear();
         subjectNotify();
     }
 
     public void undo(GraphicsContext gc) {
+
         commandInvoker.undo();
-//        reRender(gc);
         subjectNotify();
     }
 
     public void redo(GraphicsContext gc) {
+
         commandInvoker.redo();
-//        reRender(gc);
         subjectNotify();
     }
 
@@ -194,17 +192,15 @@ public class ModelFacade extends Observable {
      * Redraws the canvas
      */
     public void reRender(GraphicsContext gc) {
+
         gc.clearRect(0, 0, canvasWidth, canvasHeight);
         gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, canvasWidth, canvasHeight);
         for (Shape s : shapes) {
             s.draw(gc);
         }
-        // also draw markedBoundry
-        drawMarkedShapesBoundry(gc);
 
-        //setChanged();
-        //notifyObservers(shapes);
+        drawMarkedShapesBoundry(gc);
     }
 
     /**
@@ -239,10 +235,11 @@ public class ModelFacade extends Observable {
      * Changes the color of all marked shapes
      */
     public void editMarkedColor(GraphicsContext gc, Color color) {
+
         for (Shape shape : markedShapes) {
             commandInvoker.setCommand(new ChangeColorCommand(shape, color));
         }
-//        reRender(gc);
+
         subjectNotify();
     }
 
@@ -250,9 +247,10 @@ public class ModelFacade extends Observable {
      * Changes the filled value of all marked shapes
      */
     public void editMarkedFilled(GraphicsContext gc, boolean filled) {
+
         for (Shape s : markedShapes) {
+
             commandInvoker.setCommand(new ChangeFilledCommand(s, filled));
-//            reRender(gc);
             subjectNotify();
         }
     }
@@ -261,16 +259,17 @@ public class ModelFacade extends Observable {
      * Changes the thickness value of all marked shapes
      */
     public void editMarkedThickness(GraphicsContext gc, double thickness) {
+
         for (Shape shape : markedShapes) {
             commandInvoker.setCommand(new ChangeThicknessCommand(shape, thickness));
-//            reRender(gc);
             subjectNotify();
         }
     }
 
     // Called by the subject, i.e. this class, to notify observers of state change
     private void subjectNotify() {
-        setChanged(); //
-        notifyObservers(shapes); //
+
+        setChanged();
+        notifyObservers(shapes);
     }
 }

@@ -33,6 +33,7 @@ public class CompositeShape extends Shape implements Cloneable {
 
     /**
      * Adds all marked shapes into this composite shapes
+     *
      * @param markedShapes the marked shapes to be made into composite
      */
     public void addShapes(List<Shape> markedShapes) {
@@ -61,6 +62,7 @@ public class CompositeShape extends Shape implements Cloneable {
     /**
      * Modifies all shapes in this composite to
      * a new filled option
+     *
      * @param filled the new option
      */
     @Override
@@ -72,6 +74,7 @@ public class CompositeShape extends Shape implements Cloneable {
 
     /**
      * Changes the thickness of all shapes in this composite
+     *
      * @param thickness the new thickness
      */
     @Override
@@ -83,6 +86,7 @@ public class CompositeShape extends Shape implements Cloneable {
 
     /**
      * Changes the color of all shapes in this composite.
+     *
      * @param color the new color
      */
     @Override

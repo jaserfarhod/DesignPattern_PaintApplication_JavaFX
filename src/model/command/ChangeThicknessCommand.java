@@ -16,7 +16,8 @@ public class ChangeThicknessCommand implements CommandInterface {
 
     /**
      * Change thickness of edge for a shape
-     * @param shape the shape to change
+     *
+     * @param shape        the shape to change
      * @param newThickness the thickness to change to
      */
     public ChangeThicknessCommand(Shape shape, double newThickness) {

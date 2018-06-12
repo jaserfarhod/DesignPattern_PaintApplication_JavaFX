@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -24,7 +25,7 @@ public class Line extends Shape implements Cloneable, Serializable {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Line";
     }
 }

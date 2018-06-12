@@ -25,6 +25,7 @@ public class ShapePrototype {
 
     /**
      * To create a new shape
+     *
      * @param type the shape to create
      * @return a clone of the shape type
      */

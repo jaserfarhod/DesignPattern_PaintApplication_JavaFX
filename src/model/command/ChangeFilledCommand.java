@@ -17,7 +17,8 @@ public class ChangeFilledCommand implements CommandInterface {
 
     /**
      * Change if a shape is filled or not
-     * @param shape the shape to change
+     *
+     * @param shape  the shape to change
      * @param filled if it should be filled or not
      */
     public ChangeFilledCommand(Shape shape, boolean filled) {
