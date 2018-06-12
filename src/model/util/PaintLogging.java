@@ -11,7 +11,7 @@ public class PaintLogging {
     private static final Logger LOGGER = Logger.getLogger(PaintLogging.class.getName());
 
     public static void logInfo(String info) {
-        LOGGER.info(info);
+        LOGGER.info("\n" + info + "\n");
     }
 
     public static void stopLogging() {

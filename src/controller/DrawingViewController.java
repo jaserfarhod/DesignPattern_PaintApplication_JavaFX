@@ -21,6 +21,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import model.util.FileUtil;
+import model.util.PaintLogging;
 
 public class DrawingViewController implements Initializable, Observer {
 
@@ -122,6 +123,8 @@ public class DrawingViewController implements Initializable, Observer {
      * Creates a select shape.
      */
     private void createSelectedShape(MouseEvent event) {
+        PaintLogging.logInfo("DrawingViewController | createSelectedShape - method");
+
         if (shapePicker.getValue().toLowerCase().compareTo("line") != 0) {
             p1.setX(Math.min(event.getX(), startPoint.getX()));
             p1.setY(Math.min(event.getY(), startPoint.getY()));
@@ -258,6 +261,10 @@ public class DrawingViewController implements Initializable, Observer {
      */
 
     public void update(Observable observable, Object arg) {
+        PaintLogging.logInfo("DrawingViewController | update - method \n" +
+                "observable: " + observable.toString() + "\n" +
+                "arg: " + arg.toString());
+
         //observer observable from:
         // https://www.javaworld.com/article/2077258/learn-java/observer-and-observable.html
         if (observable == modelFacade) {
@@ -274,6 +281,8 @@ public class DrawingViewController implements Initializable, Observer {
                 listView.getItems().addAll(viewList);
             }
         }
+
+        modelFacade.reRender(canvas.getGraphicsContext2D());
     }
 
     /**

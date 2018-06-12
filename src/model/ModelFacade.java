@@ -9,7 +9,6 @@ import model.command.*;
 import model.factory.AbstractShapeFactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 
@@ -31,8 +30,7 @@ public class ModelFacade extends Observable {
     private double canvasHeight;
 
     public ModelFacade(double width, double height) {
-        // Turn on/off logging
-        //PaintLogging.stopLogging();
+
 
         commandInvoker = new CommandInvoker();
         factory = AbstractShapeFactory.getFactory();
@@ -55,7 +53,7 @@ public class ModelFacade extends Observable {
      * @param gc             the GraphicsContext from the canvas to draw on
      */
     public void drawShape(String shapeType, Point p1, Point p2, Color color, double thicknessValue, boolean isFilled, GraphicsContext gc) {
-        PaintLogging.logInfo("drawShape - method\n" +
+        PaintLogging.logInfo("ModelFacade | drawShape - method\n" +
                 "Type: " + shapeType);
 
         Shape shape = createShape(shapeType.toLowerCase());
@@ -65,27 +63,22 @@ public class ModelFacade extends Observable {
             shape.draw(gc);
 
             commandInvoker.setCommand(new AddCommand(shapes, shape));
-
-            setChanged();
-            notifyObservers(shapes);
+            subjectNotify();
         }
     }
 
     /**
      * Draw a composite from the list of composites
+     *
      * @param compositeNr which composite
-     * @param p1 coordinate for upper left
-     * @param p2 coordinate for lower right
-     * @param color color for the composite
-     * @param thickness thickness of the composite
-     * @param filled if the composite is filled
-     * @param gc to draw the composite
+     * @param p1          coordinate for upper left
+     * @param p2          coordinate for lower right
+     * @param color       color for the composite
+     * @param thickness   thickness of the composite
+     * @param filled      if the composite is filled
+     * @param gc          to draw the composite
      */
     public void drawComposite(int compositeNr, Point p1, Point p2, Color color, Double thickness, boolean filled, GraphicsContext gc) {
-        PaintLogging.logInfo("in drawComposite(...) method \n" +
-                "compositeNr: " + compositeNr);
-
-        PaintLogging.logInfo("compositeShapes " + Arrays.toString(compositeShapes.toArray()));
 
         Shape shape = compositeShapes.get(compositeNr).clone();
         shape.init(p1, p2, color, thickness, filled);
@@ -93,8 +86,7 @@ public class ModelFacade extends Observable {
 
         commandInvoker.setCommand(new AddCommand(shapes, shape));
 
-        setChanged();
-        notifyObservers(shapes);
+        subjectNotify();
     }
 
     /**
@@ -130,6 +122,7 @@ public class ModelFacade extends Observable {
 
     /**
      * Return the list of shapes
+     *
      * @return the list of shapes
      */
     public ArrayList<Shape> getShapes() {
@@ -149,7 +142,8 @@ public class ModelFacade extends Observable {
                     clicked.getY() < Math.max(shape.getP1().getY(), shape.getP2().getY())) {
 
                 setMarkedShape(shape);
-                reRender(gc);
+//                reRender(gc);
+                subjectNotify();
             }
         }
     }
@@ -180,19 +174,20 @@ public class ModelFacade extends Observable {
         }
         markedShapes.clear();
 
-        reRender(gc);
-        setChanged();
-        notifyObservers(shapes);
+//        reRender(gc);
+        subjectNotify();
     }
 
     public void undo(GraphicsContext gc) {
         commandInvoker.undo();
-        reRender(gc);
+//        reRender(gc);
+        subjectNotify();
     }
 
     public void redo(GraphicsContext gc) {
         commandInvoker.redo();
-        reRender(gc);
+//        reRender(gc);
+        subjectNotify();
     }
 
     /**
@@ -208,12 +203,13 @@ public class ModelFacade extends Observable {
         // also draw markedBoundry
         drawMarkedShapesBoundry(gc);
 
-        setChanged();
-        notifyObservers(shapes);
+        //setChanged();
+        //notifyObservers(shapes);
     }
 
     /**
      * Draws a marking outline around the marked shape.
+     *
      * @param gc to draw on
      */
     private void drawMarkedShapesBoundry(GraphicsContext gc) {
@@ -246,7 +242,8 @@ public class ModelFacade extends Observable {
         for (Shape shape : markedShapes) {
             commandInvoker.setCommand(new ChangeColorCommand(shape, color));
         }
-        reRender(gc);
+//        reRender(gc);
+        subjectNotify();
     }
 
     /**
@@ -255,7 +252,8 @@ public class ModelFacade extends Observable {
     public void editMarkedFilled(GraphicsContext gc, boolean filled) {
         for (Shape s : markedShapes) {
             commandInvoker.setCommand(new ChangeFilledCommand(s, filled));
-            reRender(gc);
+//            reRender(gc);
+            subjectNotify();
         }
     }
 
@@ -265,7 +263,14 @@ public class ModelFacade extends Observable {
     public void editMarkedThickness(GraphicsContext gc, double thickness) {
         for (Shape shape : markedShapes) {
             commandInvoker.setCommand(new ChangeThicknessCommand(shape, thickness));
-            reRender(gc);
+//            reRender(gc);
+            subjectNotify();
         }
+    }
+
+    // Called by the subject, i.e. this class, to notify observers of state change
+    private void subjectNotify() {
+        setChanged(); //
+        notifyObservers(shapes); //
     }
 }

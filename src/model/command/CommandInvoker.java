@@ -18,12 +18,13 @@ public class CommandInvoker {
 
     /**
      * Add a command to the Invoker
+     *
      * @param command the command to add
      */
     public void setCommand(CommandInterface command) {
-        if(command instanceof DeleteCommand){
+        if (command instanceof DeleteCommand) {
             redoStack.push(command);
-        }else {
+        } else {
             undoStack.push(command);
         }
     }

@@ -16,6 +16,9 @@ public class PaintApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        // Turn on/off logging
+        //PaintLogging.stopLogging();
+
         Parent root = FXMLLoader.load(getClass().getResource("../view/DrawingView.fxml"));
 
         primaryStage.setTitle("Paint Application");

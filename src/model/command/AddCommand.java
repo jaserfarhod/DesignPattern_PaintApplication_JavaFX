@@ -17,8 +17,9 @@ public class AddCommand implements CommandInterface {
 
     /**
      * Add the shape to a list of shapes
+     *
      * @param shapes the list of shapes
-     * @param shape the shape to add
+     * @param shape  the shape to add
      */
     public AddCommand(List<Shape> shapes, Shape shape) {
         this.shape = shape;
