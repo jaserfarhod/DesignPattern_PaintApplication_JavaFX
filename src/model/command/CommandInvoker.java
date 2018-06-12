@@ -11,6 +11,7 @@ public class CommandInvoker {
     private Stack<CommandInterface> redoStack;
 
     public CommandInvoker() {
+
         this.undoStack = new Stack<>();
         this.redoStack = new Stack<>();
     }

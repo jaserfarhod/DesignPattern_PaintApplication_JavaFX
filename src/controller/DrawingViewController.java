@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,22 +50,13 @@ public class DrawingViewController implements Initializable, Observer {
     private ListView<String> listView;
     @FXML
     private CheckBox editSelectedItem;
-//    @FXML
-//    private Button deleteButton;
-//    @FXML
-//    private MenuItem openProject;
-//    @FXML
-//    private MenuItem saveProject;
-//    @FXML
-//    private MenuItem saveImage;
-//    @FXML
-//    private MenuItem closeProgram;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -89,7 +81,7 @@ public class DrawingViewController implements Initializable, Observer {
         colorPicker.setValue(Color.BLACK);
 
         modelFacade = new ModelFacade(canvas.getWidth(), canvas.getHeight());
-        modelFacade.addObserver(this);  //adds controller as observer to modelFacade
+        modelFacade.addObserver(this);  // adds controller as observer to modelFacade
     }
 
     /**
@@ -127,7 +119,7 @@ public class DrawingViewController implements Initializable, Observer {
     }
 
     /**
-     * Creats a select shape.
+     * Creates a select shape.
      */
     private void createSelectedShape(MouseEvent event) {
         if (shapePicker.getValue().toLowerCase().compareTo("line") != 0) {
@@ -138,13 +130,23 @@ public class DrawingViewController implements Initializable, Observer {
         }
 
         if (p1.getX() != p2.getX() && p1.getY() != p2.getY()) {
+
+            // if the selected shape is NOT a composite shape
             if (!shapePicker.getValue().toLowerCase().contains("composite")) {
+
                 modelFacade.drawShape(shapePicker.getValue(), new Point(p1.getX(), p1.getY()), new Point(p2.getX(), p2.getY()),
                         colorPicker.getValue(), thicknessPicker.getValue(), filledShape.isSelected(), canvas.getGraphicsContext2D());
+
             } else {
-                modelFacade.drawComposite(Integer.parseInt(shapePicker.getValue().toLowerCase().replace("composite", "")) - 1,
+
+                // if the selected shape is a composite shape
+                // compositeNr -1, because array list is indexed 0...n, and the shapePicker has them indexed 1...n
+                int compositeNo = Integer.parseInt(shapePicker.getValue().replaceAll("\\D", "")) - 1;
+
+                modelFacade.drawComposite(compositeNo,
                         new Point(p1.getX(), p1.getY()), new Point(p2.getX(), p2.getY()),
                         colorPicker.getValue(), thicknessPicker.getValue(), filledShape.isSelected(), canvas.getGraphicsContext2D());
+
             }
         }
     }
@@ -262,18 +264,15 @@ public class DrawingViewController implements Initializable, Observer {
 
             //https://stackoverflow.com/questions/14346219/unsafe-parameterized-arraylist-cast-after-notify-from-observable
             viewList.clear();
-            if(arg instanceof ArrayList<?>){
-                for(Object o: (ArrayList<?>)arg){
-                    if(o instanceof Shape){
+            if (arg instanceof ArrayList<?>) {
+                for (Object o : (ArrayList<?>) arg) {
+                    if (o instanceof Shape) {
                         viewList.add(o.toString());
                     }
                 }
                 listView.getItems().clear();
                 listView.getItems().addAll(viewList);
             }
-
-//            listView.getItems().clear();
-//            listView.getItems().addAll(modelFacade.getShapesList());
         }
     }
 
@@ -317,6 +316,7 @@ public class DrawingViewController implements Initializable, Observer {
 
     /**
      * Menu button 'Close'
+     *
      * @param event fxevent
      */
     @FXML
